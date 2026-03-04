@@ -10,7 +10,7 @@ Backend Engineer. Payments nerd. Reluctant economist. Mandarin learner (我在�
 
 I build the boring stuff that keeps everything working — microservices, payment gateways, audit trails. I've worked on B2B projects integrating with players like **Uber** and **Correios**, and I currently work as a Software Engineer at **ZapSign** (part of the **Truora** umbrella), optimizing the codebase of the digital signature service.
 
-By day I'm writing Go and Node.js services. By night I'm either reading about monetary policy, watching the order book on some exchange, or failing to pronounce a fourth tone correctly.
+By day I'm writing Node.js, Python and some Go services. By night I'm either reading about monetary policy, watching the order book on some exchange, or failing to pronounce a fourth tone correctly.
 
 Certified **PCI-DSS** practitioner and general payments nerd. I've built direct-acquirer integrations, custom gateway routing and the kind of observability stack that makes 3am incidents slightly less painful.
 

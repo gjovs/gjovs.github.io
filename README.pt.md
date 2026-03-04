@@ -10,7 +10,7 @@ Engenheiro de Backend. Obcecado com pagamentos. Economista por conta própria. A
 
 Eu construo as coisas chatas que fazem tudo funcionar — microsserviços, gateways de pagamento, trilhas de auditoria. Trabalhei em projetos B2B com integrações envolvendo players como **Uber** e **Correios**, e atualmente sou Engenheiro de Software na **ZapSign** (parte do guarda-chuva da **Truora**), otimizando o codebase do serviço de assinatura digital.
 
-De dia escrevo serviços em Go e Node.js. De noite estou ou lendo sobre política monetária, olhando o livro de ordens de alguma exchange, ou sofrendo com a pronúncia do quarto tom do mandarim.
+De dia escrevo serviços em Node.js, Python e alguns em Go. De noite estou ou lendo sobre política monetária, olhando o livro de ordens de alguma exchange, ou sofrendo com a pronúncia do quarto tom do mandarim.
 
 Certificado **PCI-DSS** e entusiasta de meios de pagamento. Já construí integrações diretas com adquirentes, roteamento customizado de gateway e o tipo de stack de observabilidade que torna incidentes às 3 da manhã apenas moderadamente dolorosos.
 
