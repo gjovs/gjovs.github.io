@@ -3,45 +3,120 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Guilherme Joviniano — Backend Developer" />
-  <title>Guilherme Joviniano</title>
-  <link rel="icon" href="https://avatars.githubusercontent.com/u/73798396?v=4" type="image/png" />
+  <meta name="description" content="Guilherme Joviniano — Backend Engineer" />
+  <title>gjovs — $ ./run-the-world.sh</title>
+  <link rel="icon" href="assets/profile.jpg" type="image/jpeg" />
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
 </head>
 <body>
+
+  <!-- language switcher -->
+  <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <button class="lang-btn" data-lang="pt">PT</button>
+    <button class="lang-btn" data-lang="zh">中文</button>
+  </div>
+
   <div class="container" id="content">
     <div class="loader">Loading...</div>
   </div>
 
+  <!-- hello button -->
+  <a
+    class="hello-btn"
+    id="hello-btn"
+    href="https://linkedin.com/in/gjovs"
+    target="_blank"
+    rel="noopener noreferrer"
+  >Send me a hello! 👋</a>
+
   <script>
-    const README_URL =
-      'https://raw.githubusercontent.com/gjovs/gjovs.github.io/main/README.md';
+    const isLocal =
+      location.hostname === 'localhost' ||
+      location.hostname === '127.0.0.1' ||
+      location.protocol === 'file:';
 
-    async function render() {
+    const BASE = isLocal
+      ? ''
+      : 'https://raw.githubusercontent.com/gjovs/gjovs.github.io/main/';
+
+    const FILES = {
+      en: BASE + 'README.en.md',
+      pt: BASE + 'README.pt.md',
+      zh: BASE + 'README.zh.md',
+    };
+
+    const HELLO = {
+      en: 'Send me a hello! 👋',
+      pt: 'Manda um oi! 👋',
+      zh: '来打个招呼！👋',
+    };
+
+    const LANG_ATTR = {
+      en: 'en',
+      pt: 'pt-BR',
+      zh: 'zh-CN',
+    };
+
+    let current = 'en';
+    const cache = {};
+
+    async function loadLang(lang) {
       const container = document.getElementById('content');
-      try {
-        const res = await fetch(README_URL);
-        if (!res.ok) throw new Error('fetch failed');
-        const md = await res.text();
-        container.innerHTML = marked.parse(md);
+      container.style.opacity = '0';
 
-        // make avatar circular
-        const img = container.querySelector('img');
-        if (img) img.classList.add('avatar');
-
-        // open all links in new tab
-        container.querySelectorAll('a').forEach(a => {
-          a.target = '_blank';
-          a.rel = 'noopener noreferrer';
-        });
-      } catch (e) {
-        container.innerHTML = '<p>Could not load content. Please try again later.</p>';
-        console.error(e);
+      if (!cache[lang]) {
+        try {
+          const res = await fetch(FILES[lang]);
+          if (!res.ok) throw new Error('fetch failed');
+          cache[lang] = await res.text();
+        } catch (e) {
+          container.innerHTML = '<p>Could not load content.</p>';
+          container.style.opacity = '1';
+          console.error(e);
+          return;
+        }
       }
+
+      container.innerHTML = marked.parse(cache[lang]);
+
+      // avatar
+      const img = container.querySelector('img');
+      if (img) img.classList.add('avatar');
+
+      // links in new tab
+      container.querySelectorAll('a').forEach(a => {
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+      });
+
+      // hello button label
+      document.getElementById('hello-btn').textContent = HELLO[lang];
+
+      // html lang attribute
+      document.documentElement.lang = LANG_ATTR[lang];
+
+      container.style.opacity = '1';
     }
 
-    document.addEventListener('DOMContentLoaded', render);
+    function setActive(lang) {
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        if (lang === current) return;
+        current = lang;
+        setActive(lang);
+        loadLang(lang);
+      });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => loadLang('en'));
   </script>
 </body>
 </html>
