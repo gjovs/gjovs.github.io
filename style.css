@@ -187,18 +187,37 @@ blockquote {
   transform: translateY(-2px);
 }
 
-/* responsive */
-@media only screen and (max-width: 1024px) {
+/* responsive — tablet */
+@media (max-width: 1024px) {
   html {
-    font-size: 2.5rem;
+    font-size: 1rem;
+  }
+
+  .container {
+    width: 90%;
+    padding: 32px;
   }
 }
 
+/* responsive — mobile */
 @media (max-width: 480px) {
+  html {
+    font-size: 0.95rem;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  h2 {
+    font-size: 1.15rem;
+  }
+
   .container {
-    width: 95%;
-    padding: 20px;
-    margin: 3% auto;
+    width: 100%;
+    padding: 16px;
+    margin: 0 auto;
+    border-radius: 0;
   }
 
   .avatar {
