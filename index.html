@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Guilherme Joviniano — Backend Developer" />
+  <title>Guilherme Joviniano</title>
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/73798396?v=4" type="image/png" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+</head>
+<body>
+  <div class="container" id="content">
+    <div class="loader">Loading...</div>
+  </div>
+
+  <script>
+    const README_URL =
+      'https://raw.githubusercontent.com/gjovs/gjovs.github.io/main/README.md';
+
+    async function render() {
+      const container = document.getElementById('content');
+      try {
+        const res = await fetch(README_URL);
+        if (!res.ok) throw new Error('fetch failed');
+        const md = await res.text();
+        container.innerHTML = marked.parse(md);
+
+        // make avatar circular
+        const img = container.querySelector('img');
+        if (img) img.classList.add('avatar');
+
+        // open all links in new tab
+        container.querySelectorAll('a').forEach(a => {
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+        });
+      } catch (e) {
+        container.innerHTML = '<p>Could not load content. Please try again later.</p>';
+        console.error(e);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', render);
+  </script>
+</body>
+</html>
